@@ -497,7 +497,7 @@ wget -k -m -r https://ieeeucsd.org/
     <!--TODO include this in the repo as to not depend on npm-->
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
     <script>
-      Reveal.addEventListener('slidechanged', function(event) {
+      const renderTyping = function(event) {
         // Check if the current slide contains an element with id "BashSlide1"
         if (event.currentSlide.querySelector('#BashSlide1')) {
           // Initialize Typed.js on the element
@@ -511,8 +511,8 @@ wget -k -m -r https://ieeeucsd.org/
               'IEEE@UCSD$ for file in \$(ls \-1a)\; do\\\n> ',
               'IEEE@UCSD$ for file in \$(ls \-1a)\; do\\\n> echo Replacing "Andrew" with "Mike"',
               'IEEE@UCSD$ for file in \$(ls \-1a)\; do\\\n> printf "Replacing \\"Andrew\\" with \\"Mike\\" in file %s" $i',
-              'IEEE@UCSD$ for file in \$(ls \-1a)\; do\\\n> printf "Replacing \\"Andrew\\" with \\"Mike\\" in file %s\\n" $i\n> sed \'s/Andrew/Mike/g\' $i',
-              'IEEE@UCSD$ for file in \$(ls \-1a)\; do\\\n> printf "Replacing \\"Andrew\\" with \\"Mike\\" in file %s\\n" $i\n> sed -i \'s/Andrew/Mike/g\' $i\ndone \n^1000#forgot to acount for directories',
+              'IEEE@UCSD$ for file in \$(ls \-1a)\; do\\\n> printf "Replacing \\"Andrew\\" with \\"Mike\\" in file %s\\n" $file\\n> sed \'s/Andrew/Mike/g\' $file',
+              'IEEE@UCSD$ for file in \$(ls \-1a)\; do\\\n> printf "Replacing \\"Andrew\\" with \\"Mike\\" in file %s\\n" $file\\n> sed -i \'s/Andrew/Mike/g\' $file\ndone \n^1000#forgot to acount for directories',
               'IEEE@UCSD$ find . -exec sex -',
               'IEEE@UCSD$ find . -exec sed -i \'s',
               'IEEE@UCSD$ find . -type f exec sed -i \'s/Andrew/Mi',
@@ -526,7 +526,9 @@ wget -k -m -r https://ieeeucsd.org/
             loop: true, // Whether to loop the animation
           });
         }
-      });
+      }
+      Reveal.addEventListener('ready', renderTyping);
+      Reveal.addEventListener('slidechanged', renderTyping);
     </script>
   </body>
 </html>
