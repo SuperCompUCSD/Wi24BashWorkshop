@@ -497,11 +497,12 @@ wget -k -m -r https://ieeeucsd.org/
     <!--TODO include this in the repo as to not depend on npm-->
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
     <script>
+      let typed = null;
       const renderTyping = function(event) {
         // Check if the current slide contains an element with id "BashSlide1"
         if (event.currentSlide.querySelector('#BashSlide1')) {
           // Initialize Typed.js on the element
-          var typed = new Typed('#BashSlide1', {
+          typed = new Typed('#BashSlide1', {
             strings: [
               'IEEE@UCSD$ ls | sed s\'/',
               'IEEE@UCSD$ ls | sed',
@@ -525,6 +526,8 @@ wget -k -m -r https://ieeeucsd.org/
             showCursor: false,
             loop: true, // Whether to loop the animation
           });
+        } else {
+          typed.destroy();
         }
       }
       Reveal.addEventListener('ready', renderTyping);
